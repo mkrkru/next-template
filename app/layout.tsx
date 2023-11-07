@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   <Providers>
     <Launcher />
 
-    <main style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', paddingBottom: '0px', justifyContent: 'center', minHeight: '90vh', width: '100%' }}>
+    <main style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh', width: '100%' }}>
       {children}
     </main>
   </Providers>
