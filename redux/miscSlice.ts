@@ -2,11 +2,11 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from '@reduxjs/toolkit';
 
 interface MiscState {
-    isLaptop: boolean;
+    isLaptop: boolean | null;
 }
 
 const initialState: MiscState = {
-    isLaptop: false
+    isLaptop: null
 };
 
 export const miscSlice = createSlice({
