@@ -1,14 +1,13 @@
 import './globals.css';
 import { Providers } from "./providers";
 import { Launcher } from "@/components/Common";
-import type { Metadata as RawMetadata } from "next";
+import type { Metadata } from "next";
 
-interface Metadata extends RawMetadata {
-  'application-name': string;
-}
+// interface Metadata extends RawMetadata {
+//   'application-name': string;
+// }
 
 export const metadata: Metadata = {
-  'application-name': 'app name',
   description: 'app desc',
   manifest: '/manifest.json',
   title: 'app title'
