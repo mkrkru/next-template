@@ -9,8 +9,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <CacheProvider>
             <ChakraProvider theme={extendTheme({
                 fonts: {
-                    body: `'Manrope Variable', sans-serif`,
-                    heading: `'Manrope Variable', sans-serif`,
+                    body: `'Manrope Variable', sans-serif`
                 },
                 colors: {
                     main: {

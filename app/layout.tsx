@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   description: 'app desc',
-  manifest: '/manifest.json',
+  // manifest: '/manifest.json',
   title: 'app title'
 }
 
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   <Providers>
     <Launcher />
 
-    <main style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh', width: '100%' }}>
+    <main style={{ alignItems: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: '100vh', width: '100%', color: 'white' }}>
       {children}
     </main>
   </Providers>
