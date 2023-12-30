@@ -1,13 +1,13 @@
 'use client';
-import { setIsLaptop } from "@/redux/miscSlice";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from '@/redux/hooks';
+import { setIsLaptop } from "@/redux/miscSlice";
 import { motion } from 'framer-motion';
 import { ease } from "@/utils/misc";
+import { useEffect } from "react";
 
 export function Launcher() {
     const dispatch = useDispatch();
-    const { isLaptop } = useSelector(state => state.misc);
+    const { isLaptop } = useSelector(({ misc }) => misc);
 
     useEffect(() => {
         dispatch(setIsLaptop(!window.matchMedia("(max-width: 600px)").matches));

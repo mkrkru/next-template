@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:perfectionist/recommended-line-length"
+  ],
+  "plugins": [
+    "perfectionist"
+  ],
+  "rules": {
+    "perfectionist/sort-objects": "off",
+    "perfectionist/sort-jsx-props": [
+      "error",
+      {
+        "type": "line-length",
+        "order": "asc",
+        "groups": [
+          "unknown",
+          "shorthand"
+        ]
+      }
+    ]
 }
