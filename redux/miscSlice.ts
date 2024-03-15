@@ -2,22 +2,22 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from '@reduxjs/toolkit';
 
 interface MiscState {
-    isLaptop: boolean | null;
+    device: string | null;
 }
 
 const initialState: MiscState = {
-    isLaptop: null
+    device: null
 };
 
 export const miscSlice = createSlice({
     name: 'misc',
     initialState,
     reducers: {
-        setIsLaptop: (state, action: PayloadAction<boolean>) => {
-            state.isLaptop = action.payload;
+        setDevice: (state, action: PayloadAction<string>) => {
+            state.device = action.payload;
         }
     }
 })
 
-export const { setIsLaptop } = miscSlice.actions;
+export const { setDevice } = miscSlice.actions;
 export default miscSlice.reducer;

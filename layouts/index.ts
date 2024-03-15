@@ -3,7 +3,7 @@ import PhoneLayout from './Phone';
 
 const layouts = {
     'laptop': LaptopLayout,
-    // 'tablet': LaptopLayout,
+    'tablet': LaptopLayout,
     'phone': PhoneLayout
 };
 
