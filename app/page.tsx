@@ -1,7 +1,10 @@
-import { Box, Text, HStack } from "@chakra-ui/react";
+'use client';
+import getLayout from '@/layouts';
+import { useSelector } from '@/redux/hooks';
 
 export default function Home() {
-  return <HStack w='100%' justify='center'>
-    <Text opacity={0.5}>start</Text>
-  </HStack>
+  const { isLaptop } = useSelector(({ misc }) => misc);
+  const Layout = getLayout(isLaptop ? 'laptop' : 'phone');
+
+  return <Layout />
 }

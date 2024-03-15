@@ -10,7 +10,12 @@ export function Launcher() {
     const { isLaptop } = useSelector(({ misc }) => misc);
 
     useEffect(() => {
-        dispatch(setIsLaptop(!window.matchMedia("(max-width: 600px)").matches));
+        function launch() {
+            dispatch(setIsLaptop(!window.matchMedia("(max-width: 600px)").matches));
+        }
+
+        launch();
+        window.onresize = launch;
     }, [dispatch]);
 
     return <>
