@@ -12,7 +12,6 @@ RUN npm i -g pnpm
 COPY --from=deps /deps/node_modules ./
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_PUBLIC_CDN=https://cdn.fish.twodev.cc
 RUN pnpm build
 
 FROM base
