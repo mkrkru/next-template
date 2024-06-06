@@ -9,7 +9,7 @@ RUN pnpm install --frozen-lockfile
 FROM base AS build
 WORKDIR /build
 RUN npm i -g pnpm
-COPY --from=deps /deps/node_modules ./
+COPY --from=deps /deps/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm build
