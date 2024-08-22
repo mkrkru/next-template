@@ -1,6 +1,5 @@
 import axios, { Method } from 'axios';
 import { useToast } from '@chakra-ui/react';
-import { useDispatch } from '@/redux/hooks';
 import { useCallback } from 'react';
 
 const api = axios.create({
