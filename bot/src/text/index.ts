@@ -7,9 +7,8 @@ export default async function textHandler(ctx: Context & any) {
     if (ctx.message.text === '/id') return ctx.reply(ctx.from.id);
 
     const user = await User.findById(ctx.from.id);
-    if (!user) {
-        ctx.user = await User.create({ _id: ctx.from.id });
-        await run(ctx);
-        return;
-    } else ctx.user = user;
+    if (!user) ctx.user = await User.create({ _id: ctx.from.id });
+    else ctx.user = user;
+
+    await run(ctx);
 }
