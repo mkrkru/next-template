@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <Providers>
         <Launcher />
 
-        <main style={{ minHeight: '100vh', width: '100%', color: 'white' }}>
+        <main style={{ minHeight: '100svh', width: '100%', color: 'white' }}>
             {children}
         </main>
     </Providers>

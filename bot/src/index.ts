@@ -10,10 +10,10 @@ import { Context } from 'telegraf';
 export const bot = new (require('telegraf').Telegraf)(process.env.TOKEN);
 bot.cmds = new Map();
 
-fs.readdir(join(__dirname, 'cmds'), (err, files) => {
+fs.readdir(join(__dirname, './text/cmds'), (err, files) => {
     if (err) return console.error(err);
     files.filter(f => f.endsWith(process.env.TS_NODE_DEV === 'true' ? '.ts' : '.js')).forEach(f => {
-        const cmd = require(join(__dirname, 'cmds', f));
+        const cmd = require(join(__dirname, './text/cmds', f));
         cmd.misc.aliases.forEach((a: string) => bot.cmds.set(a, cmd));
     });
 });

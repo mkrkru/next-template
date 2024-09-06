@@ -16,7 +16,7 @@ interface IError {
     error: string;
 }
 
-const localStorageName = 'poker_token';
+const localStorageName = 'token';
 
 export function useApi() {
     const toast = useToast();
