@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+import './ws';
 const fastify = require('fastify')({ logger: true });
 
 mongoose.connect(`mongodb://${process.env.NODE_ENV === 'production' ? 'mongo' : '127.0.0.1'}/template`);

@@ -13,5 +13,5 @@ export function SocketContextProvider({ children }: { children: React.ReactNode 
 export function useWs() {
     const context = useContext(SocketContext);
     if (!context) throw new Error('Use app context within provider!');
-    return { ws: context.current, send: (data: any) => context.current.send(JSON.stringify(data)) };
+    return { ws: context.current, send: (data: any) => context.current?.send(JSON.stringify(data)) };
 }

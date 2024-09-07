@@ -11,6 +11,13 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
         '/signup',
         {
             schema: {
+                body: {
+                    type: 'object',
+                    properties: {
+                        nickname: { type: 'string' },
+                        password: { type: 'string' }
+                    }
+                },
                 tags: ['auth']
             }
         } as any,
@@ -23,7 +30,7 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
             const password_hash = await bcrypt.hash(password, 10);
             user = await User.create({ nickname, password_hash });
 
-            res.code(201).send({ access_token: jwt.sign({ nickname }, jwt_secret, { expiresIn }) });
+            res.code(201).send({ access_token: jwt.sign({ _id: user._id }, jwt_secret, { expiresIn }) });
         }
     );
 
@@ -31,6 +38,13 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
         '/signin',
         {
             schema: {
+                body: {
+                    type: 'object',
+                    properties: {
+                        nickname: { type: 'string' },
+                        password: { type: 'string' }
+                    }
+                },
                 tags: ['auth']
             }
         } as any,
@@ -39,12 +53,12 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
             const message = 'invalid nickname or password';
 
             const user = await User.findOne({ nickname });
-            if (!user || !user.nickname || !user.password_hash) return res.code(404).send({ message });
+            if (!user || !user._id || !user.password_hash) return res.code(404).send({ message });
 
             const valid_hash = await bcrypt.compare(password, user.password_hash.toString());
             if (!valid_hash) return res.code(403).send({ message });
 
-            res.code(200).send({ access_token: jwt.sign({ nickname: user.nickname.toString() }, jwt_secret, { expiresIn }) });
+            res.code(200).send({ access_token: jwt.sign({ _id: user._id }, jwt_secret, { expiresIn }) });
         }
     );
 
