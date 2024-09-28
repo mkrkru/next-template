@@ -11,7 +11,7 @@
     "mongoose": "^8.5.1",
     "ws": "^8.18.0"
   },
-  "name": "cia-api",
+  "name": "template-backend",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {

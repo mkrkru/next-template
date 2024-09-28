@@ -1,24 +1,32 @@
 services:
-  # FRONT
   frontend:
-    build: ./frontend
+    build: frontend
     restart: unless-stopped
     ports:
       - "3001:3000"
-  # BOT
   bot:
-    build: ./bot
+    build: bot
     restart: unless-stopped
     links:
       - mongo
     depends_on:
       - mongo
-    mongo:
-      image: mongo:latest
-      restart: unless-stopped
-      expose:
-        - 27017
-      volumes:
-        - mongo:/data/db
+  backend:
+    build: backend
+    restart: unless-stopped
+    ports:
+      - "4001:4000"
+      - "8001:8000"
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo:latest
+    restart: unless-stopped
+    expose:
+      - 27017
+    volumes:
+      - mongo:/data/db
 volumes:
   mongo:

@@ -18,8 +18,7 @@ function broadcast(data: any) {
 wss.on('connection', async (ws: any, req: any) => {
     ws.on('error', console.error);
 
-    const token: string | null = new URL('https://example.com/' + req.url).searchParams.get('token');
-    const user: any | null = await jwtWsHandler(token ?? '');
+    const user: any | null = await jwtWsHandler(req.url.slice(1) ?? '');
     if (!user) return ws.close();
 
     console.log(`[⚠️WS] ${user.nickname} connected!`);
