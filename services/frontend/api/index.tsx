@@ -1,7 +1,7 @@
 import axios, { Method } from 'axios';
 import { useToast } from '@chakra-ui/react';
 import { useCallback } from 'react';
-import { deleteAuth, getAuth, setAuth } from '@/api/cookiesStore';
+import { deleteAuth, getAuth, setAuth } from './cookiesStore';
 import { usePathname } from 'next/navigation';
 import { useWs } from '@/app/SocketContext';
 
