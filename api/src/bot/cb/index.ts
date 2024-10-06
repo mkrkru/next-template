@@ -1,6 +1,6 @@
 import { Context } from 'telegraf';
 import * as cmds from './cmds';
-import { User } from '../models';
+import { User } from '../../models';
 
 export default async function cbHandler(ctx: Context & any) {
     const { data, from } = ctx.update.callback_query;

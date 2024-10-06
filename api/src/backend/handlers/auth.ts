@@ -1,10 +1,10 @@
 import { DoneFuncWithErrOrRes, FastifyInstance } from 'fastify';
-import { ISignupBody } from '../types';
+import { ISignupBody } from '../../types';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { jwt_secret } from '../';
-import { expiresIn } from '../misc';
-import { User } from '../models';
+import { jwt_secret } from '../index';
+import { expiresIn } from '../../misc';
+import { User } from '../../models';
 
 export default function authHandler(fastify: FastifyInstance, opts: any, done: DoneFuncWithErrOrRes) {
     fastify.post(

@@ -1,10 +1,9 @@
-import mongoose from 'mongoose';
 import './ws';
-const fastify = require('fastify')({ logger: true });
+import { logger } from '../misc';
 
-mongoose.connect(`mongodb://${process.env.NODE_ENV === 'production' ? 'mongo' : '127.0.0.1'}/template`);
-mongoose.connection.on('connected', () => console.log('[✅DB] Cluster connected!'));
+const fastify = require('fastify')({ logger });
 
+fastify.post('/', () => ({ message: 'OK' }));
 fastify.get('/', () => ({ message: 'OK' }));
 
 export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
@@ -17,9 +16,9 @@ export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
         await fastify.register(require('@fastify/swagger'), {
             swagger: {
                 info: {
-                    title: 'template DD REST API service',
+                    title: 'template REST API service',
                     // description: 'Testing the Fastify swagger API',
-                    version: '0.1.0-dev'
+                    version: require('../../package.json').version
                 },
                 securityDefinitions: {
                     apiKey: {
@@ -35,7 +34,6 @@ export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
         await fastify.register(require('./plugins/test'), { prefix: '/test' });
 
         await fastify.listen({ port: 4000, host: '0.0.0.0' });
-        console.log('template dd api launched...');
     } catch (err) {
         fastify.log.error(err);
         process.exit(1);

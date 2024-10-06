@@ -1,7 +1,7 @@
-import { Box, Text, HStack } from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
 
 export default function Home() {
-    return <HStack w='100%' justify='center'>
+    return <VStack w='100%' minH='100svh' justify='center' align='center'>
         <Text opacity={0.5}>start</Text>
-    </HStack>
+    </VStack>
 }

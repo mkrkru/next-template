@@ -1,6 +1,4 @@
-import 'dotenv/config';
 import { message } from 'telegraf/filters';
-import mongoose from 'mongoose';
 import { join } from 'path';
 import fs from 'fs';
 import textHandler from './text';
@@ -26,14 +24,11 @@ export async function run(ctx: Context & any) {
 
     try {
         await bot.cmds.get(cmd as keyof typeof bot.cmds).run(ctx);
-    } catch { }
+    } catch {
+    }
 }
-
-mongoose.connect(`mongodb://${process.env.NODE_ENV === 'production' ? 'mongo' : '127.0.0.1'}/tg-template`);
-mongoose.connection.on('connected', () => console.log('[✅DB] Cluster connected!'));
 
 bot.on(message('text'), textHandler);
 bot.on('callback_query', cbHandler);
 
-console.log('template bot launched');
 bot.launch();

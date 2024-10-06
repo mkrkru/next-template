@@ -1,4 +1,4 @@
-import { User } from '../models';
+import { User } from '../../models';
 import { Context } from 'telegraf';
 import { run } from '../';
 

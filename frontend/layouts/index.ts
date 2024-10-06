@@ -1,10 +1,9 @@
 import LaptopLayout from './Laptop';
-import PhoneLayout from './Phone';
 
 const layouts = {
     'laptop': LaptopLayout,
     'tablet': LaptopLayout,
-    'phone': PhoneLayout
+    'phone': LaptopLayout
 };
 
 export default function getLayout(device: string | null) {

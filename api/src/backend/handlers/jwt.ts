@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import { jwt_secret } from '../';
-import { User } from '../models';
+import { jwt_secret } from '../index';
+import { User } from '../../models';
 
 export async function jwtHttpHandler(req: any, res: any) {
     try {
