@@ -1,4 +1,4 @@
-import { DoneFuncWithErrOrRes, FastifyInstance } from 'fastify';
+import { FastifyInstance } from 'fastify';
 import { ISignupBody } from '../../types';
 import * as bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -6,7 +6,7 @@ import { jwt_secret } from '../index';
 import { expiresIn } from '../../misc';
 import { User } from '../../models';
 
-export default function authHandler(fastify: FastifyInstance, opts: any, done: DoneFuncWithErrOrRes) {
+export default function authHandler(fastify: FastifyInstance) {
     fastify.post(
         '/signup',
         {
@@ -20,9 +20,9 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
                 },
                 tags: ['auth']
             }
-        } as any,
-        async (req: any, res: any) => {
-            const { nickname, password }: ISignupBody = req.body;
+        } as never,
+        async (req, res) => {
+            const { nickname, password } = req.body as ISignupBody;
 
             let user = await User.findOne({ nickname }, []);
             if (user) return res.code(403).send({ message: 'nickname already exists' });
@@ -47,9 +47,9 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
                 },
                 tags: ['auth']
             }
-        } as any,
-        async (req: any, res: any) => {
-            const { nickname, password }: ISignupBody = req.body;
+        } as never,
+        async (req, res) => {
+            const { nickname, password } = req.body as ISignupBody;
             const message = 'invalid nickname or password';
 
             const user = await User.findOne({ nickname });
@@ -61,6 +61,4 @@ export default function authHandler(fastify: FastifyInstance, opts: any, done: D
             res.code(200).send({ access_token: jwt.sign({ _id: user._id }, jwt_secret, { expiresIn }) });
         }
     );
-
-    done();
 }

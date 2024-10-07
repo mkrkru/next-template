@@ -4,34 +4,36 @@ import { WebSocket, WebSocketServer } from 'ws';
 const wss = new WebSocketServer({ port: 8000 });
 
 interface IClients {
-    [username: string]: WebSocket;
+    [_id: string]: WebSocket;
 }
 
-let clients: IClients = {};
+const clients: IClients = {};
 
-function broadcast(data: any) {
+// eslint-disable-next-line
+function broadcast(data: { nickname: string, payload: any }) {
     Object.values(clients)
-        .filter((client: any) => client.readyState === WebSocket.OPEN)
-        .forEach((client: any) => client.send(JSON.stringify(data)));
+        .filter((client: WebSocket) => client.readyState === WebSocket.OPEN)
+        .forEach((client: WebSocket) => client.send(JSON.stringify(data)));
 }
 
-wss.on('connection', async (ws: any, req: any) => {
+wss.on('connection', async (ws: WebSocket, req: Request) => {
     ws.on('error', console.error);
 
-    const user: any | null = await jwtWsHandler(req.url.slice(1) ?? '');
+    const user = await jwtWsHandler(req.url.slice(1));
     if (!user) return ws.close();
 
     console.log(`[⚠️WS] ${user.nickname} connected!`);
-    const user_id = user._id.toString();
-    clients[user_id] = ws;
+    const _id = user._id.toString();
+    clients[_id] = ws;
 
+    // eslint-disable-next-line
     ws.on('message', async (data: any) => {
         console.log(`[ℹ️WS] ${user.nickname} said: ${data.toString()}`);
 
         try {
             data = JSON.parse(data.toString());
             broadcast({ nickname: user.nickname, payload: data });
-        } catch {
+        } catch { /* empty */
         }
     });
 });

@@ -1,9 +1,12 @@
 import { document, getModel, required } from 'typeodm.io';
+import { Types } from 'mongoose';
 
 @document()
 export class IUser {
+    _id!: Types.ObjectId;
+
     @required()
-    username!: string;
+    nickname!: string;
 
     @required()
     password_hash!: string;

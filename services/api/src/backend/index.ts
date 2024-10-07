@@ -1,7 +1,8 @@
 import './ws';
 import { logger } from '../misc';
+import Fastify from 'fastify';
 
-const fastify = require('fastify')({ logger });
+const fastify = Fastify({ logger });
 
 fastify.post('/', () => ({ message: 'OK' }));
 fastify.get('/', () => ({ message: 'OK' }));
@@ -10,15 +11,15 @@ export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
 
 (async () => {
     try {
-        await fastify.register(require('@fastify/rate-limit'), { max: 100, timeWindow: '1 minute' });
-        await fastify.register(require('@fastify/cors'), { origin: '*' });
+        await fastify.register(import('@fastify/rate-limit'), { max: 100, timeWindow: '1 minute' });
+        await fastify.register(import('@fastify/cors'), { origin: '*' });
 
-        await fastify.register(require('@fastify/swagger'), {
+        await fastify.register(import('@fastify/swagger'), {
             swagger: {
                 info: {
                     title: 'template REST API service',
                     // description: 'Testing the Fastify swagger API',
-                    version: require('../../package.json').version
+                    version: '0.1.0-dev'
                 },
                 securityDefinitions: {
                     apiKey: {
@@ -30,8 +31,8 @@ export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
             }
         });
 
-        await fastify.register(require('@fastify/swagger-ui'), { routePrefix: '/docs' });
-        await fastify.register(require('./plugins/test'), { prefix: '/test' });
+        await fastify.register(import('@fastify/swagger-ui'), { routePrefix: '/docs' });
+        await fastify.register(import('./plugins/user'), { prefix: '/user' });
 
         await fastify.listen({ port: 4000, host: '0.0.0.0' });
     } catch (err) {

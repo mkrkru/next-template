@@ -1,24 +1,6 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:react-hooks/recommended"
-    // "plugin:perfectionist/recommended-line-length"
+    "next/typescript"
   ]
-  // "plugins": [
-  //   "perfectionist"
-  // ],
-  // "rules": {
-  //   "perfectionist/sort-objects": "off",
-  //   "perfectionist/sort-jsx-props": [
-  //     "error",
-  //     {
-  //       "type": "line-length",
-  //       "order": "asc",
-  //       "groups": [
-  //         "unknown",
-  //         "shorthand"
-  //       ]
-  //     }
-  //   ]
-  // }
 }

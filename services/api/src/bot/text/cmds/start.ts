@@ -1,7 +1,7 @@
 import { Context } from 'telegraf';
 
-export async function run(ctx: Context & any) {
-    ctx.reply('started!');
+export async function run(ctx: Context) {
+    await ctx.reply('started!');
 }
 
 export const misc = {

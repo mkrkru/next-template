@@ -6,20 +6,19 @@
 // });
 
 // module.exports = withPWA({
-//     experimental: {
-//         scrollRestoration: true
-//     },
+//     output: 'standalone',
 //     reactStrictMode: false,
 //     images: {
 //         remotePatterns: [
 //             {
 //                 protocol: 'https',
-//                 hostname: 'storage.twodev.cc'
+//                 hostname: '*.twodev.cc'
 //             }
 //         ]
 //     }
 // })
 
+// eslint-disable-next-line no-undef
 module.exports = {
     output: 'standalone',
     reactStrictMode: false
