@@ -1,8 +1,8 @@
 import { FastifyRequest as raw } from 'fastify';
+import { IUser } from './src/models';
 
 declare module 'fastify' {
     export interface FastifyRequest extends raw {
-        // eslint-disable-next-line
-        user: any;
+        user: IUser;
     }
 }
