@@ -1,12 +1,12 @@
 import { FastifyInstance } from 'fastify';
 import { ISignupBody } from '../../types';
 import * as bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { jwt_secret } from '../index';
 import { expiresIn } from '../../misc';
 import { User } from '../../models';
 
-export default function authHandler(fastify: FastifyInstance) {
+export default async function (fastify: FastifyInstance) {
     fastify.post(
         '/signup',
         {

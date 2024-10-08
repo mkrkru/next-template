@@ -2,6 +2,7 @@
   "name": "template-api",
   "version": "1.0.0",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

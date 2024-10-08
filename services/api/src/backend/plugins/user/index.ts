@@ -1,8 +1,9 @@
 import { FastifyInstance } from 'fastify';
 import { jwtHttpHandler } from '../../handlers/jwt';
+import { IRequest } from '../../../types';
 
-export default async function userRouter(fastify: FastifyInstance) {
-    await fastify.register(import('../../handlers/auth'), { prefix: '/auth' });
+export default async function (fastify: FastifyInstance) {
+    await fastify.register(import('../../handlers/auth') as never, { prefix: '/auth' });
 
     fastify.route({
         method: 'get',
@@ -16,6 +17,8 @@ export default async function userRouter(fastify: FastifyInstance) {
             ]
         } as never),
         preHandler: jwtHttpHandler,
-        handler: (req) => req.user.toJSON()
+        handler: (req: IRequest) => {
+            return req.user.toJSON();
+        }
     });
 }

@@ -4,13 +4,13 @@ import Fastify from 'fastify';
 
 const fastify = Fastify({ logger });
 
-fastify.post('/', () => ({ message: 'OK' }));
 fastify.get('/', () => ({ message: 'OK' }));
 
 export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
 
 (async () => {
     try {
+        fastify.decorateRequest('user');
         await fastify.register(import('@fastify/rate-limit'), { max: 100, timeWindow: '1 minute' });
         await fastify.register(import('@fastify/cors'), { origin: '*' });
 
@@ -32,7 +32,7 @@ export const jwt_secret = process.env?.JWT_SECRET ?? 'tempsecret';
         });
 
         await fastify.register(import('@fastify/swagger-ui'), { routePrefix: '/docs' });
-        await fastify.register(import('./plugins/user'), { prefix: '/user' });
+        await fastify.register(import('./plugins/user') as never, { prefix: '/user' });
 
         await fastify.listen({ port: 4000, host: '0.0.0.0' });
     } catch (err) {

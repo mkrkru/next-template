@@ -9,8 +9,7 @@ interface IClients {
 
 const clients: IClients = {};
 
-// eslint-disable-next-line
-function broadcast(data: { nickname: string, payload: any }) {
+function broadcast(data: { nickname: string, payload: object }) {
     Object.values(clients)
         .filter((client: WebSocket) => client.readyState === WebSocket.OPEN)
         .forEach((client: WebSocket) => client.send(JSON.stringify(data)));
@@ -26,8 +25,7 @@ wss.on('connection', async (ws: WebSocket, req: Request) => {
     const _id = user._id.toString();
     clients[_id] = ws;
 
-    // eslint-disable-next-line
-    ws.on('message', async (data: any) => {
+    ws.on('message', async (data: object) => {
         console.log(`[ℹ️WS] ${user.nickname} said: ${data.toString()}`);
 
         try {

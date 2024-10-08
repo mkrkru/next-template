@@ -21,6 +21,7 @@ export function useApi() {
     }, [pathname]);
 
     const exec = useCallback(async (
+        // eslint-disable-next-line
         { method, url, body, onSuccess }: { method: Method, url: string, body?: any, onSuccess?: (data: any) => void }
     ) => {
         const auth = getAuth();
@@ -39,6 +40,7 @@ export function useApi() {
 
             return data;
         } catch (err) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             const msg = err?.response?.data?.message ?? err?.stack?.toString();
 
@@ -47,12 +49,12 @@ export function useApi() {
 
             return false;
         }
-    }, [signout]);
+    }, [signout, toast]);
 
     const connect = useCallback(async () => {
         if (ws.current) {
             ws.current.close();
-            ws.current = null;
+            ws.current = null as unknown as WebSocket;
         }
 
         const auth = getAuth();
@@ -78,7 +80,7 @@ export function useApi() {
         },
         connect,
         signout,
-        signin: async (payload: any) => await exec({
+        signin: async (payload: object) => await exec({
             method: 'post',
             url: '/auth/signin',
             body: payload,
@@ -87,7 +89,7 @@ export function useApi() {
                 window.location.href = '/';
             }
         }),
-        signup: async (payload: any) => await exec({
+        signup: async (payload: object) => await exec({
             method: 'post',
             url: '/auth/signup',
             body: payload,

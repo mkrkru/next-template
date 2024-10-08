@@ -1,11 +1,12 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 import { jwt_secret } from '../';
 import { IUser, User } from '../../models';
-import { FastifyReply, FastifyRequest } from 'fastify';
+import { FastifyReply } from 'fastify';
+import { IRequest } from '../../types';
 
-export async function jwtHttpHandler(req: FastifyRequest, res: FastifyReply) {
+export async function jwtHttpHandler(req: IRequest, res: FastifyReply) {
     try {
-        const { _id } = jwt.verify(req.headers.authorization ?? '', jwt_secret) as JwtPayload;
+        const { _id } = jwt.verify(req.headers.authorization ?? '', jwt_secret) as jwt.JwtPayload;
         const user = await User.findById(_id);
         if (!user) return res.code(404).send({ message: 'user not found' });
         req.user = user;
@@ -16,7 +17,7 @@ export async function jwtHttpHandler(req: FastifyRequest, res: FastifyReply) {
 
 export async function jwtWsHandler(token: string = ''): Promise<IUser | null> {
     try {
-        const { _id } = jwt.verify(token, jwt_secret) as JwtPayload;
+        const { _id } = jwt.verify(token, jwt_secret) as jwt.JwtPayload;
         return await User.findById(_id);
     } catch {
         return null;
