@@ -1,12 +1,11 @@
-import { document, getModel, required } from 'typeodm.io';
 import { Types } from 'mongoose';
+import { getModelForClass, prop } from '@typegoose/typegoose';
 
-@document()
-export class IUser {
-    _id!: Types.ObjectId;
+class IUser {
+    @prop() public _id!: Types.ObjectId;
 
-    @required() nickname!: string;
-    @required() password_hash!: string;
+    @prop() public nickname!: string;
+    @prop() public password_hash!: string;
 }
 
-export const User = getModel<IUser>(IUser);
+export const User = getModelForClass(IUser);

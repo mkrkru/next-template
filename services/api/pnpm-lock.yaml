@@ -23,6 +23,9 @@ importers:
       '@pdf-lib/fontkit':
         specifier: ^1.1.1
         version: 1.1.1
+      '@typegoose/typegoose':
+        specifier: ^12.8.0
+        version: 12.8.0(mongoose@8.7.0)
       axios:
         specifier: ^1.7.7
         version: 1.7.7
@@ -59,9 +62,6 @@ importers:
       telegraf-media-group:
         specifier: ^1.2.1
         version: 1.2.1(telegraf@4.16.3)
-      typeodm.io:
-        specifier: ^1.2.0
-        version: 1.2.0
       ws:
         specifier: ^8.18.0
         version: 8.18.0
@@ -249,6 +249,12 @@ packages:
 
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
+
+  '@typegoose/typegoose@12.8.0':
+    resolution: {integrity: sha512-YCeYYH0joT4n48WRUfofPq3KBg6OQw1zR6wB4WKflkFYf9SC4P29hf0PlmsiA+hAbubd3Qn51KmkjiUJetJmFQ==}
+    engines: {node: '>=16.20.1'}
+    peerDependencies:
+      mongoose: ~8.7.0
 
   '@types/bcrypt@5.0.2':
     resolution: {integrity: sha512-6atioO8Y75fNcbmj0G7UjI9lXN2pQ/IGJ2FWT4a/btd0Lk9lQalHLKhkgKVZ3r+spnmWUKfbMi1GEe9wyHQfNQ==}
@@ -959,6 +965,13 @@ packages:
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
 
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
+  loglevel@1.9.2:
+    resolution: {integrity: sha512-HgMmCqIJSAKqo68l0rS2AanEWfkxaZ5wNiEFb5ggm08lDs9Xl2KxBlX3PTcaD2chBM1gXAYf491/M2Rv8Jwayg==}
+    engines: {node: '>= 0.6.0'}
+
   lru-cache@11.0.1:
     resolution: {integrity: sha512-CgeuL5uom6j/ZVrg7G/+1IXqRY8JXX4Hghfy5YE0EhoYQWvndP1kufu58cmZLNIDKnRhZrXfdS9urVWx98AipQ==}
     engines: {node: 20 || >=22}
@@ -1501,12 +1514,12 @@ packages:
   tslib@1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
 
+  tslib@2.8.0:
+    resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
+
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
     engines: {node: '>= 0.8.0'}
-
-  typeodm.io@1.2.0:
-    resolution: {integrity: sha512-92spbhXAgkUfqyLwhsjw7bOjTYHzrudV28c/80UE4l7H9WsrD31bIl/a7NQ8Uvbzl4gaN5V/VBMZ36X9X6AinQ==}
 
   typescript-eslint@8.8.1:
     resolution: {integrity: sha512-R0dsXFt6t4SAFjUSKFjMh4pXDtq04SsFKCVGDP3ZOzNP7itF0jBcZYU4fMsZr4y7O7V7Nc751dDeESbe4PbQMQ==}
@@ -1802,6 +1815,15 @@ snapshots:
   '@tsconfig/node14@1.0.3': {}
 
   '@tsconfig/node16@1.0.4': {}
+
+  '@typegoose/typegoose@12.8.0(mongoose@8.7.0)':
+    dependencies:
+      lodash: 4.17.21
+      loglevel: 1.9.2
+      mongoose: 8.7.0
+      reflect-metadata: 0.2.2
+      semver: 7.6.3
+      tslib: 2.8.0
 
   '@types/bcrypt@5.0.2':
     dependencies:
@@ -2557,6 +2579,10 @@ snapshots:
 
   lodash.once@4.1.1: {}
 
+  lodash@4.17.21: {}
+
+  loglevel@1.9.2: {}
+
   lru-cache@11.0.1: {}
 
   make-dir@3.1.0:
@@ -3068,11 +3094,11 @@ snapshots:
 
   tslib@1.14.1: {}
 
+  tslib@2.8.0: {}
+
   type-check@0.4.0:
     dependencies:
       prelude-ls: 1.2.1
-
-  typeodm.io@1.2.0: {}
 
   typescript-eslint@8.8.1(eslint@9.12.0)(typescript@5.6.2):
     dependencies:

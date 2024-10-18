@@ -2,7 +2,6 @@
   "name": "template-api",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "types": "index.d.ts",
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -16,6 +15,7 @@
     "@fastify/swagger": "^9.1.0",
     "@fastify/swagger-ui": "^5.0.1",
     "@pdf-lib/fontkit": "^1.1.1",
+    "@typegoose/typegoose": "^12.8.0",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "docx": "^8.5.0",
@@ -28,7 +28,6 @@
     "reflect-metadata": "^0.2.2",
     "telegraf": "^4.16.3",
     "telegraf-media-group": "^1.2.1",
-    "typeodm.io": "^1.2.0",
     "ws": "^8.18.0"
   },
   "author": "",

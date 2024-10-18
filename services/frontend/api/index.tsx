@@ -2,7 +2,7 @@ import axios, { Method } from 'axios';
 import { useToast } from '@chakra-ui/react';
 import { useCallback } from 'react';
 import { deleteAuth, getAuth, setAuth } from './cookiesStore';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useWs } from '@/app/SocketContext';
 
 const http_host = process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:4000' : 'https://0.0.0.0:4001';
@@ -12,13 +12,14 @@ const api = axios.create({ baseURL: http_host });
 
 export function useApi() {
     const toast = useToast();
+    const router = useRouter();
     const pathname = usePathname();
     const { ws } = useWs();
 
     const signout = useCallback(() => {
         deleteAuth();
-        if (pathname !== '/auth/signin') window.location.replace('/auth/signin');
-    }, [pathname]);
+        if (pathname !== '/auth/signin') router.replace('/auth/signin');
+    }, [pathname, router]);
 
     const exec = useCallback(async (
         // eslint-disable-next-line
@@ -75,8 +76,8 @@ export function useApi() {
         async validate() {
             const auth = getAuth();
             if (!auth) {
-                if (!pathname.includes('/auth')) window.location.href = '/auth/signin';
-            } else if (pathname !== '/') window.location.href = '/';
+                if (!pathname.includes('/auth')) router.replace('/auth/signin');
+            } else if (pathname !== '/') router.replace('/');
         },
         connect,
         signout,
@@ -86,7 +87,7 @@ export function useApi() {
             body: payload,
             onSuccess(data) {
                 setAuth(data);
-                window.location.href = '/';
+                router.replace('/');
             }
         }),
         signup: async (payload: object) => await exec({
@@ -95,7 +96,7 @@ export function useApi() {
             body: payload,
             onSuccess(data) {
                 setAuth(data);
-                window.location.href = '/';
+                router.replace('/');
             }
         }),
         getMe: async () => await exec({

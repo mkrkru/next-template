@@ -5,7 +5,7 @@ export function getAuth() {
     return JSON.parse(data ?? 'null');
 }
 
-export function setAuth(payload: any) {
+export function setAuth(payload: object) {
     localStorage.setItem('token', JSON.stringify(payload));
 }
 
