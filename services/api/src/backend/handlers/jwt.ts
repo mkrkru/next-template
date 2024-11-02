@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import { jwt_secret } from '../';
-import { IUser, User } from '../../models';
+import { User } from '../../models';
 import { FastifyReply } from 'fastify';
 import { IRequest } from '../../types';
 
@@ -15,7 +15,7 @@ export async function jwtHttpHandler(req: IRequest, res: FastifyReply) {
     }
 }
 
-export async function jwtWsHandler(token: string = ''): Promise<IUser | null> {
+export async function jwtWsHandler(token: string = '') {
     try {
         const { _id } = jwt.verify(token, jwt_secret) as jwt.JwtPayload;
         return await User.findById(_id);
