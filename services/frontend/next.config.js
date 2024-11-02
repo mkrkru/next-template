@@ -18,8 +18,7 @@
 //     }
 // })
 
-// eslint-disable-next-line no-undef
 module.exports = {
-    output: 'standalone',
-    reactStrictMode: false
-}
+  output: "standalone",
+  reactStrictMode: false,
+};
