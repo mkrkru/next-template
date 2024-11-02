@@ -19,6 +19,6 @@
 // })
 
 module.exports = {
-  output: "standalone",
-  reactStrictMode: false,
+  output: 'standalone',
+  reactStrictMode: false
 };

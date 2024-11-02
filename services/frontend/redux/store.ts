@@ -1,10 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import miscReducer from "./miscSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import miscReducer from './miscSlice';
 
 export const store = configureStore({
   reducer: {
-    misc: miscReducer,
-  },
+    misc: miscReducer
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

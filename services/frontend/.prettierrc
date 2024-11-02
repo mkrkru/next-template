@@ -1,6 +1,6 @@
 {
   "singleQuote": true,
+  "jsxSingleQuote": true,
   "trailingComma": "none",
-  "printWidth": 1000,
-  "singleAttributePerLine": false
+  "printWidth": 120
 }

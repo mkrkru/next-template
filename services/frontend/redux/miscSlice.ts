@@ -1,22 +1,22 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
-import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface MiscState {
   device: string | null;
 }
 
 const initialState: MiscState = {
-  device: null,
+  device: null
 };
 
 export const miscSlice = createSlice({
-  name: "misc",
+  name: 'misc',
   initialState,
   reducers: {
     setDevice: (state, action: PayloadAction<string>) => {
       state.device = action.payload;
-    },
-  },
+    }
+  }
 });
 
 export const { setDevice } = miscSlice.actions;
