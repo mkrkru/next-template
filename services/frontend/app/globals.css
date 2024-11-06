@@ -16,11 +16,7 @@
   border-radius: 20px;
 }
 
-html,
-body {
+html, main {
   max-width: 100vw;
-}
-
-main {
   background: black;
 }
