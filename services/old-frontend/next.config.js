@@ -20,8 +20,5 @@
 
 module.exports = {
   output: 'standalone',
-  reactStrictMode: false,
-  experimental: {
-    optimizePackageImports: ['@chakra-ui/react']
-  }
+  reactStrictMode: false
 };

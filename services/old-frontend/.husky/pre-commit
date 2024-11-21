@@ -1,0 +1,2 @@
+cd services/frontend
+pnpm lint
