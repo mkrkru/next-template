@@ -1,5 +1,5 @@
 import axios, { Method } from 'axios';
-import { useToast } from '@chakra-ui/react';
+import { toaster } from '@/components/ui/toaster';
 import { useCallback, useState } from 'react';
 import { deleteAuth, getAuth, setAuth } from './cookiesStore';
 import { usePathname, useRouter } from 'next/navigation';
@@ -11,7 +11,6 @@ const ws_host = process.env.NODE_ENV === 'development' ? 'ws://127.0.0.1:8000' :
 const api = axios.create({ baseURL: http_host });
 
 export function useApi() {
-  const toast = useToast();
   const router = useRouter();
   const pathname = usePathname();
   const { ws } = useWs();
@@ -44,12 +43,12 @@ export function useApi() {
         const msg = err?.response?.data?.message ?? err?.stack?.toString();
 
         if (['user not found', 'jwt expired', 'invalid signature', 'jwt must be provided'].includes(msg)) signout();
-        else toast({ status: 'error', title: 'Ошибка', description: msg });
+        else toaster.create({ type: 'error', title: 'Ошибка', description: msg });
 
         return false;
       }
     },
-    [signout, toast]
+    [signout]
   );
 
   const connect = useCallback(async () => {

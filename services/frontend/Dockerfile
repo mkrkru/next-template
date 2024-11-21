@@ -1,28 +1,27 @@
-FROM node:20.10.0-slim AS base
+FROM oven/bun:1 AS base
 
-FROM base AS deps
-WORKDIR /deps
-RUN npm i -g pnpm
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+FROM base AS install
+RUN mkdir -p /temp/dev
+COPY package.json bun.lockb /temp/dev/
+RUN cd /temp/dev && bun install --frozen-lockfile
 
-FROM base AS build
-WORKDIR /build
-RUN npm i -g pnpm
-COPY --from=deps /deps/node_modules ./node_modules
+FROM base AS prerelease
+COPY --from=install /temp/dev/node_modules node_modules
 COPY . .
-ENV NEXT_TELEMETRY_DISABLED=1
-RUN pnpm build
 
-FROM base
-WORKDIR /serve
+ENV NEXT_TELEMETRY_DISABLED=1
+RUN bun run build
+
+FROM base AS release
 RUN mkdir .next
-COPY --from=build /build/public ./public
-COPY --from=build /build/.next/standalone ./
-COPY --from=build /build/.next/static ./.next/static
+COPY --from=prerelease /home/bun/app/public ./public
+COPY --from=prerelease /home/bun/app/.next/standalone ./
+COPY --from=prerelease /home/bun/app/.next/static ./.next/static
 
 HEALTHCHECK CMD curl -f http://localhost:3000 || exit 1
 
 ENV NODE_ENV=production
 ENV HOSTNAME="0.0.0.0"
-CMD ["node", "server.js"]
+
+USER bun
+CMD ["bun", "server.js"]

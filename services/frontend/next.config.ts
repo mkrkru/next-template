@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+import { NextConfig } from 'next';
 
 // const withPWA = require('next-pwa')({
 //     dest: 'public',
@@ -18,10 +18,12 @@
 //     }
 // })
 
-module.exports = {
+const config: NextConfig = {
   output: 'standalone',
   reactStrictMode: false,
   experimental: {
     optimizePackageImports: ['@chakra-ui/react']
   }
 };
+
+export default config;
